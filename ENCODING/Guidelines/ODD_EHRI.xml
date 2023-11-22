@@ -32,6 +32,8 @@
             </sourceDesc>
         </fileDesc>
         <revisionDesc>
+            <change when="2023-11" who="#floriane.chiffoleau">Added the <gi>stamp</gi> element in
+                the elements included from the "msdescription" module.</change>
             <change when="2023-11" who="#sarah.beniere">Correction of the specifications for the
                     <gi>metamark</gi> element.</change>
             <change when="2023-07" who="#sarah.beniere">Creation of the Schematron rules and
@@ -1022,7 +1024,7 @@
 
                     <!-- ADDITIONAL MODULES -->
                     <moduleRef key="msdescription"
-                        include="collection institution msDesc msIdentifier origDate origPlace physDesc repository"/>
+                        include="collection institution msDesc msIdentifier origDate origPlace physDesc repository stamp"/>
                     <moduleRef key="namesdates"
                         include="affiliation birth country death event forename geo listEvent listOrg listPerson listPlace location nameLink nationality occupation org orgName persName person place placeName settlement sex surname"/>
                     <moduleRef key="figures" include="cell row table"/>
