@@ -22,8 +22,8 @@
 						Infrastructure</ref>
 				</authority>
 				<availability>
-					<licence target="https://creativecommons.org/licenses/by/4.0/"
-						>Attribution 4.0 International (CC BY 4.0)</licence>
+					<licence target="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0
+						International (CC BY 4.0)</licence>
 				</availability>
 			</publicationStmt>
 			<sourceDesc>
@@ -53,7 +53,7 @@
 				<div type="chapter" n="1">
 					<head>About the Project</head>
 					<p>The <ref target="https://www.ehri-project.eu/">European Holocaust Research
-							Infrastructure</ref> (EHRI) is a transnational organisation with partners all
+							Infrastructure</ref> (EHRI) is a transnational organization with partners all
 						across Europe, Israel and the US. They promote collaboration on Holocaust research
 						and easy access to scattered sources. To this end, they created the <ref
 							target="https://www.ehri-project.eu/ehri-online-editions">EHRI Online
@@ -62,13 +62,13 @@
 				</div>
 				<div type="chapter" n="2">
 					<head>About this Document</head>
-					<p>This document is intended as a means for the homogenisation of encoding practices
+					<p>This document is intended as a means for the homogenization of encoding practices
 						of the EHRI Online Editions. Editors may indeed vary from one edition to another,
 						and it is essential that the encoding practices are coherent and homogenous
 						throughout the editions.</p>
 					<p>These encoding guidelines are not a replacement for the original TEI Guidelines,
-						but rather a way to clarify some uses in the context of the EHRI Online Editions,
-						which include many types of documents.</p>
+						but rather a way to clarify some usages in the context of the EHRI Online
+						Editions, which include many types of documents.</p>
 				</div>
 			</div>
 			<div type="part" n="2">
