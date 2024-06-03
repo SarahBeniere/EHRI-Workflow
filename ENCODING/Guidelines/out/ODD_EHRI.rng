@@ -5,7 +5,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2024-04-19T09:55:25Z. . 
+Schema generated from ODD source 2024-06-03T12:53:40Z. . 
 TEI Edition: P5 Version 4.7.0. Last updated on 16th November 2023, revision e5dd73ed0 
 TEI Edition Location: https://www.tei-c.org/Vault/P5/4.7.0/ 
   
@@ -1864,6 +1864,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <choice>
          <ref name="author"/>
          <ref name="respStmt"/>
+         <ref name="funder"/>
          <ref name="principal"/>
       </choice>
    </define>
@@ -2623,16 +2624,6 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
       <element name="rs">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(referencing string) contains a general purpose name or referring string. [13.2.1. Personal Names 3.6.1. Referring Strings]</a:documentation>
          <ref name="macro.phraseSeq"/>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-rs-rs-constraint-rule-6">
-            <s:rule xmlns="http://www.tei-c.org/ns/1.0"
-                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                    xmlns:s="http://purl.oclc.org/dsdl/schematron"
-                    context="tei:body//tei:rs">
-               <s:assert test="@type and @ref">Both @type and @ref are
-										mandatory</s:assert>
-            </s:rule>
-         </pattern>
          <ref name="att.global.attributes"/>
          <ref name="att.naming.attribute.role"/>
          <ref name="att.naming.attribute.nymRef"/>
@@ -2861,7 +2852,7 @@ Sample values include: 1] suspension (suspension); 2] contraction (contraction);
             </zeroOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-list-gloss-list-must-have-labels-constraint-rule-7">
+                  id="ODD_EHRI-list-gloss-list-must-have-labels-constraint-rule-6">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -2955,16 +2946,6 @@ Suggested values include: 1] gloss (gloss); 2] index (index); 3] instructions (i
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(page beginning) marks the beginning of a new page in a paginated document. [3.11.3. Milestone
 Elements]</a:documentation>
          <empty/>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-pb-pbN-constraint-rule-8">
-            <s:rule xmlns="http://www.tei-c.org/ns/1.0"
-                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                    xmlns:s="http://purl.oclc.org/dsdl/schematron"
-                    context="tei:body//tei:pb">
-               <s:assert test="matches(@n, '^[0-9]+$')"> @n attribute must be a positive
-										non-zero integer </s:assert>
-            </s:rule>
-         </pattern>
          <ref name="att.global.attribute.xmlid"/>
          <ref name="att.global.attribute.xmllang"/>
          <ref name="att.global.attribute.xmlbase"/>
@@ -3030,7 +3011,7 @@ Elements 7.2.5. Speech Contents]</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-author-calendar-calendar-check-author-constraint-rule-9">
+                  id="ODD_EHRI-author-calendar-calendar-check-author-constraint-rule-7">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -3095,7 +3076,7 @@ Elements 7.2.5. Speech Contents]</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-resp-calendar-calendar-check-resp-constraint-rule-10">
+                  id="ODD_EHRI-resp-calendar-calendar-check-resp-constraint-rule-8">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -3139,7 +3120,7 @@ Sample values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] sho
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-title-calendar-calendar-check-title-constraint-rule-11">
+                  id="ODD_EHRI-title-calendar-calendar-check-title-constraint-rule-9">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -3269,6 +3250,41 @@ Sample values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] sho
          <empty/>
       </element>
    </define>
+   <define name="funder">
+      <element name="funder">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(funding body) specifies the name of an individual, institution, or organization responsible for the funding of a project or text. [2.2.1. The Title Statement]</a:documentation>
+         <ref name="macro.phraseSeq.limited"/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.canonical.attributes"/>
+         <ref name="att.datable.attributes"/>
+         <optional>
+            <attribute name="calendar">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates one or more systems or calendars to which the date represented by the content of this element belongs.</a:documentation>
+               <list>
+                  <oneOrMore>
+                     <data type="anyURI">
+                        <param name="pattern">\S+</param>
+                     </data>
+                  </oneOrMore>
+               </list>
+            </attribute>
+         </optional>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="ODD_EHRI-funder-calendar-calendar-check-funder-constraint-rule-10">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:s="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:xi="http://www.w3.org/2001/XInclude"
+                      context="tei:*[@calendar]">
+               <sch:assert test="string-length( normalize-space(.) ) gt 0"> @calendar indicates one or more
+                        systems or calendars to which the date represented by the content of this element belongs,
+                        but this <sch:name/> element has no textual content.</sch:assert>
+            </sch:rule>
+         </pattern>
+         <empty/>
+      </element>
+   </define>
    <define name="principal">
       <element name="principal">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(principal researcher) supplies the name of the principal researcher responsible for the creation of an electronic text. [2.2.1. The Title Statement]</a:documentation>
@@ -3289,7 +3305,7 @@ Sample values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] sho
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-principal-calendar-calendar-check-principal-constraint-rule-12">
+                  id="ODD_EHRI-principal-calendar-calendar-check-principal-constraint-rule-11">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -3388,7 +3404,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-idno-calendar-calendar-check-idno-constraint-rule-13">
+                  id="ODD_EHRI-idno-calendar-calendar-check-idno-constraint-rule-12">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -3450,7 +3466,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-licence-calendar-calendar-check-licence-constraint-rule-14">
+                  id="ODD_EHRI-licence-calendar-calendar-check-licence-constraint-rule-13">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -3577,7 +3593,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-creation-calendar-calendar-check-creation-constraint-rule-15">
+                  id="ODD_EHRI-creation-calendar-calendar-check-creation-constraint-rule-14">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -3745,7 +3761,7 @@ Suggested values include: 1] smuggling; 2] fate; 3] refugee_policy; 4] reports</
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-change-calendar-calendar-check-change-constraint-rule-16">
+                  id="ODD_EHRI-change-calendar-calendar-check-change-constraint-rule-15">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -3960,18 +3976,6 @@ Suggested values include: 1] smuggling; 2] fate; 3] refugee_policy; 4] reports</
             </optional>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-div-div-1-constraint-rule-17">
-            <s:rule xmlns="http://www.tei-c.org/ns/1.0"
-                    xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                    xmlns:s="http://purl.oclc.org/dsdl/schematron"
-                    xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                    context="tei:TEI/text/body/div[@type]">
-               <s:assert test="@type='transcription' or @type='translation'"> Value for
-										@type in first-level division is either "transcription" or
-										"translation" </s:assert>
-            </s:rule>
-         </pattern>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="ODD_EHRI-div-abstractModel-structure-div-in-l-or-lg-constraint-report-5">
             <rule context="tei:div">
                <sch:report xmlns="http://www.tei-c.org/ns/1.0"
@@ -3995,24 +3999,89 @@ Suggested values include: 1] smuggling; 2] fate; 3] refugee_policy; 4] reports</
       </sch:report>
             </rule>
          </pattern>
-         <ref name="att.global.attributes"/>
+         <ref name="att.global.attribute.xmlid"/>
+         <ref name="att.global.attribute.n"/>
+         <ref name="att.global.attribute.xmlbase"/>
+         <ref name="att.global.attribute.xmlspace"/>
+         <ref name="att.global.rendition.attribute.rend"/>
+         <ref name="att.global.rendition.attribute.style"/>
+         <ref name="att.global.rendition.attribute.rendition"/>
+         <ref name="att.global.facs.attribute.facs"/>
+         <ref name="att.global.change.attribute.change"/>
+         <ref name="att.global.responsibility.attribute.cert"/>
+         <ref name="att.global.responsibility.attribute.resp"/>
+         <ref name="att.global.source.attribute.source"/>
          <ref name="att.divLike.attributes"/>
          <ref name="att.typed.attribute.subtype"/>
          <ref name="att.declaring.attributes"/>
          <ref name="att.written.attributes"/>
-         <attribute name="type">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the element in some sense, using any convenient classification scheme or typology.
-Suggested values include: 1] transcription; 2] translation</a:documentation>
-            <choice>
-               <value>transcription</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               <value>translation</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               <data type="token">
-                  <param name="pattern">[^\p{C}\p{Z}]+</param>
-               </data>
-            </choice>
-         </attribute>
+         <optional>
+            <attribute name="xml:lang">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(language) indicates the language of the element content using a tag generated according to <a xmlns="http://www.w3.org/1999/xhtml"
+                     href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</a>.
+Suggested values include: 1] cs; 2] da; 3] de; 4] el; 5] en; 6] es; 7] fr; 8] he; 9] hu; 10] it; 11] ja; 12] nl; 13] pl; 14] ru; 15] sk; 16] uk; 17] yi</a:documentation>
+               <choice>
+                  <value>cs</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Czech</a:documentation>
+                  <value>da</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Danish</a:documentation>
+                  <value>de</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">German</a:documentation>
+                  <value>el</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Modern Greek</a:documentation>
+                  <value>en</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">English</a:documentation>
+                  <value>es</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Spanish</a:documentation>
+                  <value>fr</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">French</a:documentation>
+                  <value>he</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Hebrew</a:documentation>
+                  <value>hu</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Hungarian</a:documentation>
+                  <value>it</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Italian</a:documentation>
+                  <value>ja</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Japanese</a:documentation>
+                  <value>nl</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Dutch</a:documentation>
+                  <value>pl</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Polish</a:documentation>
+                  <value>ru</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Russian</a:documentation>
+                  <value>sk</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Slovak</a:documentation>
+                  <value>uk</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Ukrainian</a:documentation>
+                  <value>yi</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Yiddish</a:documentation>
+                  <choice>
+                     <data type="language"/>
+                     <choice>
+                        <value/>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     </choice>
+                  </choice>
+               </choice>
+            </attribute>
+         </optional>
+         <optional>
+            <attribute name="type">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the element in some sense, using any convenient classification scheme or typology.
+Suggested values include: 1] transcription; 2] original; 3] translation</a:documentation>
+               <choice>
+                  <value>transcription</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                  <value>original</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                  <value>translation</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                  <data type="token">
+                     <param name="pattern">[^\p{C}\p{Z}]+</param>
+                  </data>
+               </choice>
+            </attribute>
+         </optional>
          <empty/>
       </element>
    </define>
@@ -4154,7 +4223,7 @@ Suggested values include: 1] transcription; 2] translation</a:documentation>
             </choice>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-msDesc-one_ms_singleton_max-constraint-rule-18">
+                  id="ODD_EHRI-msDesc-one_ms_singleton_max-constraint-rule-16">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -4217,7 +4286,7 @@ Suggested values include: 1] transcription; 2] translation</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-origPlace-calendar-calendar-check-origPlace-constraint-rule-19">
+                  id="ODD_EHRI-origPlace-calendar-calendar-check-origPlace-constraint-rule-17">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -4252,7 +4321,7 @@ Suggested values include: 1] transcription; 2] translation</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-stamp-calendar-calendar-check-stamp-constraint-rule-20">
+                  id="ODD_EHRI-stamp-calendar-calendar-check-stamp-constraint-rule-18">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -4522,7 +4591,7 @@ Suggested values include: 1] transcription; 2] translation</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-orgName-calendar-calendar-check-orgName-constraint-rule-21">
+                  id="ODD_EHRI-orgName-calendar-calendar-check-orgName-constraint-rule-19">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -4559,7 +4628,7 @@ Suggested values include: 1] transcription; 2] translation</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-persName-calendar-calendar-check-persName-constraint-rule-22">
+                  id="ODD_EHRI-persName-calendar-calendar-check-persName-constraint-rule-20">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -4625,7 +4694,7 @@ Suggested values include: 1] transcription; 2] translation</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-placeName-calendar-calendar-check-placeName-constraint-rule-23">
+                  id="ODD_EHRI-placeName-calendar-calendar-check-placeName-constraint-rule-21">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -4661,7 +4730,7 @@ Suggested values include: 1] transcription; 2] translation</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-country-calendar-calendar-check-country-constraint-rule-24">
+                  id="ODD_EHRI-country-calendar-calendar-check-country-constraint-rule-22">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -4697,7 +4766,7 @@ Suggested values include: 1] transcription; 2] translation</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-settlement-calendar-calendar-check-settlement-constraint-rule-25">
+                  id="ODD_EHRI-settlement-calendar-calendar-check-settlement-constraint-rule-23">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -4743,7 +4812,7 @@ Sample values include: 1] sponsor; 2] recommend; 3] discredit; 4] pledged</a:doc
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-affiliation-calendar-calendar-check-affiliation-constraint-rule-26">
+                  id="ODD_EHRI-affiliation-calendar-calendar-check-affiliation-constraint-rule-24">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -4790,7 +4859,7 @@ Sample values include: 1] caesarean (caesarean section); 2] vaginal (vaginal del
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-birth-calendar-calendar-check-birth-constraint-rule-27">
+                  id="ODD_EHRI-birth-calendar-calendar-check-birth-constraint-rule-25">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -4837,7 +4906,7 @@ Sample values include: 1] proclaimed; 2] assumed; 3] verified; 4] clinical; 5] b
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-death-calendar-calendar-check-death-constraint-rule-28">
+                  id="ODD_EHRI-death-calendar-calendar-check-death-constraint-rule-26">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -4922,7 +4991,7 @@ Sample values include: 1] proclaimed; 2] assumed; 3] verified; 4] clinical; 5] b
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-event-calendar-calendar-check-event-constraint-rule-29">
+                  id="ODD_EHRI-event-calendar-calendar-check-event-constraint-rule-27">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -5113,7 +5182,7 @@ Sample values include: 1] proclaimed; 2] assumed; 3] verified; 4] clinical; 5] b
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-location-calendar-calendar-check-location-constraint-rule-30">
+                  id="ODD_EHRI-location-calendar-calendar-check-location-constraint-rule-28">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -5159,7 +5228,7 @@ Sample values include: 1] birth; 2] naturalised; 3] self-assigned</a:documentati
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-nationality-calendar-calendar-check-nationality-constraint-rule-31">
+                  id="ODD_EHRI-nationality-calendar-calendar-check-nationality-constraint-rule-29">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -5205,7 +5274,7 @@ Sample values include: 1] primary; 2] other; 3] paid; 4] unpaid</a:documentation
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-occupation-calendar-calendar-check-occupation-constraint-rule-32">
+                  id="ODD_EHRI-occupation-calendar-calendar-check-occupation-constraint-rule-30">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -5412,7 +5481,7 @@ Sample values include: 1] primary; 2] other; 3] paid; 4] unpaid</a:documentation
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="ODD_EHRI-sex-calendar-calendar-check-sex-constraint-rule-33">
+                  id="ODD_EHRI-sex-calendar-calendar-check-sex-constraint-rule-31">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -5872,7 +5941,7 @@ Suggested values include: 1] crosses; 2] dots; 3] line; 4] stars</a:documentatio
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="ODD_EHRI-att.datable.w3c-att-datable-w3c-when-constraint-rule-34">
+            id="ODD_EHRI-att.datable.w3c-att-datable-w3c-when-constraint-rule-32">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -5883,7 +5952,7 @@ Suggested values include: 1] crosses; 2] dots; 3] line; 4] stars</a:documentatio
       </sch:rule>
    </pattern>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="ODD_EHRI-att.datable.w3c-att-datable-w3c-from-constraint-rule-35">
+            id="ODD_EHRI-att.datable.w3c-att-datable-w3c-from-constraint-rule-33">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -5894,7 +5963,7 @@ Suggested values include: 1] crosses; 2] dots; 3] line; 4] stars</a:documentatio
       </sch:rule>
    </pattern>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="ODD_EHRI-att.datable.w3c-att-datable-w3c-to-constraint-rule-36">
+            id="ODD_EHRI-att.datable.w3c-att-datable-w3c-to-constraint-rule-34">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -6126,7 +6195,7 @@ Suggested values include: 1] top; 2] bottom; 3] margin; 4] opposite; 5] overleaf
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="ODD_EHRI-att.pointing-targetLang-targetLang-constraint-rule-37">
+            id="ODD_EHRI-att.pointing-targetLang-targetLang-constraint-rule-35">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:s="http://purl.oclc.org/dsdl/schematron"
@@ -6234,7 +6303,7 @@ Suggested values include: 1] label; 2] data</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="ODD_EHRI-att.typed-subtypeTyped-constraint-rule-38">
+            id="ODD_EHRI-att.typed-subtypeTyped-constraint-rule-36">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:s="http://purl.oclc.org/dsdl/schematron"

@@ -32,6 +32,8 @@
 			</sourceDesc>
 		</fileDesc>
 		<revisionDesc>
+			<change when="2024-06-03" who="#sarah.beniere">Updated the specification of <gi>div</gi>
+				and added <gi>funder</gi> + removed all Schematron rules.</change>
 			<change when="2024-04-03" who="#sarah.beniere">Updated the <gi>licence</gi>.</change>
 			<change when="2023-11" who="#floriane.chiffoleau">Added the <gi>stamp</gi> element in the
 				elements included from the "msdescription" module.</change>
@@ -217,6 +219,14 @@
 								</egXML>
 								<p>If details of the process are unknown, it is possible to use the mention
 									"Edited by", but it must not be the privileged option.</p>
+							</div>
+							<div type="subsubsection" n="4">
+								<head>Funding Body (<gi>funder</gi>)</head>
+								<p>If the text was processed thanks to a particular funding, it is indicated
+									with the <gi>funder</gi> element.</p>
+								<egXML xmlns="http://www.tei-c.org/ns/Examples">
+									<funder>Zukunftsfonds der Republik Österreich</funder>
+								</egXML>
 							</div>
 						</div>
 						<div type="subsection" n="2">
@@ -451,16 +461,30 @@
 							<head>Basic text structure</head>
 							<p>The <gi>body</gi> of the TEI file is composed of nested <gi>div</gi>
 								elements, which take a mandatory <att>type</att> attribute. The value of
-									<att>type</att> depends on the structure of the document, but for the
-								first-level <gi>div</gi> the value is either "<val>transcription</val>" or
-									"<val>translation</val>."</p>
+									<att>type</att> for first-level <gi>div</gi> is always
+									"<val>transcription</val>".</p>
+							<p>The second-level <gi>div</gi> takes two mandatory attributes:
+									<att>type</att> and <att>xml:lang</att>. <att>type</att> has two possible
+								values: "<val>original</val>" or "<val>translation</val>". The value for
+									<att>xml:lang</att> must match those of the <ref
+									target="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
+									>Iana Language Subtag Registry</ref> (see Section 2.1.3 "Format of date
+								and language attribute values").</p>
 							<egXML xmlns="http://www.tei-c.org/ns/Examples">
-								<div type="transcription">
-									<p>An das Bezirksgendarmerie Kommando, alle Gend. Posten Kommandos und
-										die Grenzkontrollstelle in Berg.</p>
-								</div>
+								<body>
+									<div type="transcription">
+										<div type="original" xml:lang="de">
+											<p>An das Bezirksgendarmerie Kommando, alle Gend. Posten Kommandos
+												und die Grenzkontrollstelle in Berg.</p>
+										</div>
+										<div type="translation" xml:lang="en">
+											<p>To the District Gendarmerie Command, all Gendarmerie Post
+												Commands and the border control point in Berg.</p>
+										</div>
+									</div>
+								</body>
 							</egXML>
-							<p>Within the first-level division, the sections are also divided within
+							<p>Within the second-level division, the sections are also divided within
 									<gi>div</gi> elements, which can be numbered with the <att>n</att>
 								attribute. If the sections are titled, the title should appear in a
 									<gi>head</gi> element:</p>
@@ -971,7 +995,7 @@
 					<!-- MANDATORY MODULES -->
 					<moduleRef key="tei"/>
 					<moduleRef key="header"
-						include="abstract authority availability catRef change creation encodingDesc fileDesc idno keywords langUsage language licence listChange principal profileDesc projectDesc publicationStmt revisionDesc seriesStmt sourceDesc teiHeader textClass titleStmt"/>
+						include="abstract authority availability catRef change creation encodingDesc fileDesc funder idno keywords langUsage language licence listChange principal profileDesc projectDesc publicationStmt revisionDesc seriesStmt sourceDesc teiHeader textClass titleStmt"/>
 					<moduleRef key="core"
 						include="abbr address addrLine author bibl date del desc distinct foreign head hi item label lb list name note num p pb postCode q ref resp respStmt rs street term textLang title unclear"/>
 					<moduleRef key="textstructure"
@@ -1048,37 +1072,98 @@
 					</elementSpec>
 
 					<elementSpec ident="div" mode="change">
-						<constraintSpec scheme="schematron" ident="div-1">
+						<!-- <constraintSpec scheme="schematron" ident="div-1">
 							<constraint>
-								<s:rule context="tei:TEI/text/body/div[@type]">
-									<s:assert test="@type='transcription' or @type='translation'"> Value for
-										@type in first-level division is either "transcription" or
-										"translation" </s:assert>
-								</s:rule>
-							</constraint>
-						</constraintSpec>
+								<s:rule context="tei:div[@n='1']">
+									<s:assert test="matches(@type, 'transcription')">Value for @type in the
+										first-level division (@n=1) must be "transcription".</s:assert>
+								</s:rule></constraint>
+						</constraintSpec> -->
+						<!-- <constraintSpec scheme="schematron" ident="div-2">
+							<constraint>
+								<s:rule context="tei:TEI/text/body/div/div[@type]">
+									<s:assert test="@type='original' or @type='translation'">Value for @type
+										in second-level division is either "original" or
+										"translation"</s:assert>
+								</s:rule></constraint>
+						</constraintSpec> -->
 						<attList>
-							<!-- @type is mandatory and its value should either be "transcription" or "translation" -->
-							<attDef ident="type" mode="change" usage="req">
+							<attDef ident="type" mode="change" usage="rec">
 								<valList mode="add" type="semi">
 									<valItem ident="transcription"/>
+									<valItem ident="original"/>
 									<valItem ident="translation"/>
+								</valList>
+							</attDef>
+							<attDef ident="xml:lang" mode="change" usage="rec">
+								<valList mode="add" type="semi">
+									<valItem ident="cs">
+										<desc>Czech</desc>
+									</valItem>
+									<valItem ident="da">
+										<desc>Danish</desc>
+									</valItem>
+									<valItem ident="de">
+										<desc>German</desc>
+									</valItem>
+									<valItem ident="el">
+										<desc>Modern Greek</desc>
+									</valItem>
+									<valItem ident="en">
+										<desc>English</desc>
+									</valItem>
+									<valItem ident="es">
+										<desc>Spanish</desc>
+									</valItem>
+									<valItem ident="fr">
+										<desc>French</desc>
+									</valItem>
+									<valItem ident="he">
+										<desc>Hebrew</desc>
+									</valItem>
+									<valItem ident="hu">
+										<desc>Hungarian</desc>
+									</valItem>
+									<valItem ident="it">
+										<desc>Italian</desc>
+									</valItem>
+									<valItem ident="ja">
+										<desc>Japanese</desc>
+									</valItem>
+									<valItem ident="nl">
+										<desc>Dutch</desc>
+									</valItem>
+									<valItem ident="pl">
+										<desc>Polish</desc>
+									</valItem>
+									<valItem ident="ru">
+										<desc>Russian</desc>
+									</valItem>
+									<valItem ident="sk">
+										<desc>Slovak</desc>
+									</valItem>
+									<valItem ident="uk">
+										<desc>Ukrainian</desc>
+									</valItem>
+									<valItem ident="yi">
+										<desc>Yiddish</desc>
+									</valItem>
 								</valList>
 							</attDef>
 						</attList>
 					</elementSpec>
 
 					<elementSpec ident="pb" mode="change">
-						<constraintSpec scheme="schematron" ident="pbN">
+						<!-- <constraintSpec scheme="schematron" ident="pbN">
 							<constraint>
 								<s:rule context="tei:body//tei:pb">
-									<s:assert test="matches(@n, '^[0-9]+$')"> @n attribute must be a positive
-										non-zero integer </s:assert>
+									<s:assert test="matches(@n, '^[0-9]\d*$')"> @n attribute must be a
+										positive non-zero integer </s:assert>
 								</s:rule>
 							</constraint>
-						</constraintSpec>
-						<!-- @n and @facs attributes are mandatory -->
+						</constraintSpec> -->
 						<attList>
+							<!-- @n and @facs attributes are mandatory -->
 							<attDef ident="n" mode="change" usage="req"/>
 							<attDef ident="facs" mode="change" usage="req"/>
 						</attList>
@@ -1193,17 +1278,18 @@
 						</attList>
 					</elementSpec>
 
+					<!-- AJOUTER @role="warning" dans s:assert -->
 					<elementSpec ident="rs" mode="change">
-						<constraintSpec scheme="schematron" ident="rs">
+						<!-- <constraintSpec scheme="schematron" ident="rs">
 							<constraint>
 								<s:rule context="tei:body//tei:rs">
-									<s:assert test="@type and @ref">Both @type and @ref are
+									<s:assert role="warning" test="@type and @ref">Both @type and @ref are
 										mandatory</s:assert>
 								</s:rule>
 							</constraint>
-						</constraintSpec>
-						<!-- @type and @ref are mandatory -->
+						</constraintSpec> -->
 						<attList>
+							<!-- @type and @ref are mandatory -->
 							<attDef ident="type" mode="change" usage="req">
 								<!-- Semi-closed list of values for @type -->
 								<valList mode="add" type="semi">
@@ -1217,8 +1303,8 @@
 					</elementSpec>
 
 					<elementSpec ident="unclear" mode="change">
-						<!-- @reason is mandatory -->
 						<attList>
+							<!-- @reason is mandatory -->
 							<attDef ident="reason" mode="change" usage="req">
 								<!-- Deletion of values not needed for EHRI editions -->
 								<valList mode="change">
